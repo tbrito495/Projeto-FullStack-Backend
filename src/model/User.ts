@@ -2,9 +2,11 @@ export class User{
     constructor(
     private id: string,
     private name: string,
-    private email: string,
+    private nickname:string,
     private password: string,
-    private role: UserRole
+    private email: string,
+ 
+
     ){}
 
     getId(){
@@ -15,16 +17,16 @@ export class User{
         return this.name
     }
 
-    getEmail(){
+    getNickname(){
         return this.email;
     }
-
+    
     getPassword(){
         return this.password;
     }
 
-    getRole(){
-        return this.role;
+    getEmail(){
+        return this.nickname;
     }
 
     setId(id: string){
@@ -35,41 +37,28 @@ export class User{
         this.name = name;
     }
 
+    setNickname(name: string){
+        this.name = name;
+    }
+    setPassword(password: string){
+        this.password = password;
+    }
+    
     setEmail(email: string){
         this.email = email;
     }
 
-    setPassword(password: string){
-        this.password = password;
-    }
-
-    setRole(role: UserRole){
-        this.role = role;
-    }
-
-   static stringToUserRole(input: string): UserRole{
-        switch (input) {
-            case "NORMAL":
-              return UserRole.NORMAL;
-            case "ADMIN":
-              return UserRole.ADMIN;
-            default:
-              throw new Error("Invalid user role");
-          }
-    }
-
+ 
     static toUserModel(user: any): User {
-        return new User(user.id, user.name, user.email, user.password, User.stringToUserRole(user.role));
-      }
-
-
+        return new User(user.id, user.name, user.nickname, user.password, user.email, );
+    }
 }
 
 export interface UserInputDTO{
-    email: string;
-    password: string;
     name: string;
-    role: string;
+    nickname:string;
+    password: string;
+    email: string;
 }
 
 export interface LoginInputDTO{
@@ -77,7 +66,3 @@ export interface LoginInputDTO{
     password: string;
 }
 
-export enum UserRole{
-    NORMAL = "NORMAL",
-    ADMIN = "ADMIN"
-}

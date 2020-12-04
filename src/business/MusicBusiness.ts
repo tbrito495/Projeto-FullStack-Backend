@@ -1,42 +1,63 @@
-import { BandDatabase } from "../data/MusicDatabase"
-import { InvalidInputError } from "../error/InvalidInputError"
-import { UnauthorizedError } from "../error/UnauthorizedError"
-import { Band, BandInputDTO } from "../model/Band"
-import { User, UserRole } from "../model/User"
+import {MusicDatabase} from"../data/MusicDatabase"
+import { BaseError } from "../error/BaseError"
+import { Music, MusicInputDTO } from "../model/Music"
 import { Authenticator } from "../services/Authenticator"
 import { IdGenerator } from "../services/IdGenerator"
 
-export class BandBusiness {
+export class MusicBusiness {
     constructor(
-        private bandDatabase: BandDatabase,
+        private musicdatabase: MusicDatabase,
         private idGenerator: IdGenerator,
         private authenticator: Authenticator
     ) { }
 
-    async registerBand(input: BandInputDTO, token: string) {
-        const tokenData = this.authenticator.getData(token)
-
-        if (tokenData.role !== UserRole.ADMIN) {
-            throw new UnauthorizedError("Only admins can access this feature")
+    async registerMusic(input: MusicInputDTO, token: string) {
+        try {
+            const tokenData = this.authenticator.getData(token)
+            if(!tokenData){
+                throw new BaseError("not authorized", 401)
+            }
+            
+            if (!input.title || !input.file || !input.genre || !input.album) {
+                throw new BaseError("Invalid input to register music", 422)
+            }
+            
+            const date = new Date()
+    
+    
+           const result = await this.musicdatabase.createMusic(
+                Music.toMusicModel({
+                    ...input,
+                    date:date,
+                    author:tokenData.id,
+                    id: this.idGenerator.generate()
+                })!
+                
+            )
+            return result
+        } catch (error) {
+           throw new BaseError(error.message, error.statusCode)
         }
 
-        if (!input.name || !input.mainGenre || !input.responsible) {
-            throw new InvalidInputError("Invalid input to registerBand")
-        }
-
-        await this.bandDatabase.createBand(
-            Band.toBand({
-                ...input,
-                id: this.idGenerator.generate()
-            })!
-        )
     }
 
-    async getBandDetailByIdOrName(input: string): Promise<Band> {
+    async getMusic(input: string, token:string): Promise<Music> {
+ 
+       try {
+        const tokenData = this.authenticator.getData(token)
+
+        if(!tokenData){
+                throw new BaseError("not authorized", 401)
+            }
         if (!input) {
-            throw new InvalidInputError("Invalid input to getBandDetails")
+            throw new BaseError("Invalid input to getMusicDetails", 400)
         }
 
-        return this.bandDatabase.getBandByIdOrNameOrFail(input)
+         const result = await this.musicdatabase.getMusic(input)
+         return result
+    }   
+       catch (error) {
+           throw new BaseError(error.message, error.statusCode)
+       } 
     }
 }
