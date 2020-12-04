@@ -1,56 +1,54 @@
 import { Request, Response } from "express"
-import { BandBusiness } from "../business/MusicBusiness"
-import { BandDatabase } from "../data/MusicDatabase"
-import { BaseDatabase } from "../data/BaseDatabase"
-import { BandInputDTO } from "../model/Band"
+
+import { MusicInputDTO } from "../model/Music"
 import { Authenticator } from "../services/Authenticator"
 import { IdGenerator } from "../services/IdGenerator"
+import { MusicBusiness } from "../business/MusicBusiness"
+import { MusicDatabase } from "../data/MusicDatabase"
+import BaseDatabase from "../data/BaseDatabase"
 
-export class BandController {
-    async registerBand(req: Request, res: Response) {
+export class MusicController {
+    async registerMusic(req: Request, res: Response) {
         try {
-            const input: BandInputDTO = {
-                name: req.body.name,
-                mainGenre: req.body.mainGenre,
-                responsible: req.body.responsible
+            const input: MusicInputDTO = {
+                title: req.body.title,
+                file: req.body.file,
+                genre: req.body.genre,
+                album: req.body.album
             }
     
-            const bandBusiness = new BandBusiness(
-                new BandDatabase,
+            const musicBusiness = new MusicBusiness(
+                new MusicDatabase,
                 new IdGenerator,
                 new Authenticator
             )
     
-            await bandBusiness.registerBand(input, req.headers.authorization as string)
+            await musicBusiness.registerMusic(input, req.headers.authorization as string)
     
-            res.sendStatus(200)
+            res.status(200).send({message:"created"})
         } catch (err) {
             res.status(err.customErrorCode || 400).send({
                 message: err.message
             })
-        } finally {
-            await BaseDatabase.destroyConnection()
         }
     }
 
-    async getBandDetail(req: Request, res: Response) {
+    async getMusic(req: Request, res: Response) {
         try {
-            const input = (req.query.id ?? req.query.name) as string
+            const input = req.params.id as string
 
-            const bandBusiness = new BandBusiness(
-                new BandDatabase,
+            const musicBusiness = new MusicBusiness(
+                new MusicDatabase,
                 new IdGenerator,
                 new Authenticator
             )
-            const band = await bandBusiness.getBandDetailByIdOrName(input)
+            const token = await musicBusiness.getMusic(input, req.headers.authorization as string)
 
-            res.status(200).send(band)
+            res.status(200).send(token)
         } catch (err) {
             res.status(err.customErrorCode || 400).send({
                 message: err.message,
             })
-        } finally {
-            await BaseDatabase.destroyConnection()
-        }
+        } 
     }
 }

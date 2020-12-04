@@ -1,15 +1,16 @@
-import knex from "knex";
-import Knex   from "knex";
+import Knex from "knex";
+import knex from "knex"
+import dotenv from "dotenv"
 
-
-export abstract class BaseDatabase {
+dotenv.config();
+export default class BaseDatabase {
 
     private static connection: Knex | null = null;
 
-    protected tableNames = {
-        bands: "NOME_TABELA_BANDAS",
-        shows: "NOME_TABELA_SHOWS",
-        users: "NOME_TABELAS_USUÁRIOS"
+    protected TABLENAMES = {
+        music: "Music",
+        genre: "Genre",
+        user: "User_Music"
     }
 
     protected getConnection(): Knex{
