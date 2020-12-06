@@ -41,22 +41,32 @@ export class MusicDatabase extends BaseDatabase {
     }
 
     public async getMusic(input: string): Promise<any> {
-        console.log({id:input})
+ 
         try {
-            // const music = await this.getConnection()
-            // .select("*")
-            // .from(MusicDatabase.TABLE_NAME)
-            // .where({ id: input })
-            const music = await this.getConnection().raw(`
-                SELECT * from ${MusicDatabase.TABLE_NAME} WHERE id = '${input}'
-                `)
+            const music = await this.getConnection()
+            .select("*")
+            .from(MusicDatabase.TABLE_NAME)
+            .where({ id: input })
 
-            console.log(music[0][0])
+            console.log(music)
 
-            return Music.toMusicModel(music[0][0])
+            return Music.toMusicModel(music[0])
         } catch (error) {
             throw new Error(error.sqlMessage || error.message)
         }
-
     }
+
+    public async getAllMusic(): Promise<any> {
+    
+        try {
+            const music = await this.getConnection()
+            .select("*")
+            .from(MusicDatabase.TABLE_NAME)
+
+            return music
+        } catch (error) {
+            throw new Error(error.sqlMessage || error.message)
+        }
+    }
+    
 }

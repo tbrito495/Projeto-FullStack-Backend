@@ -51,4 +51,22 @@ export class MusicController {
             })
         } 
     }
+
+    async getAllMusic(req: Request, res: Response) {
+        try {
+          
+            const musicBusiness = new MusicBusiness(
+                new MusicDatabase,
+                new IdGenerator,
+                new Authenticator
+            )
+            const token = await musicBusiness.getAllMusic( req.headers.authorization as string)
+
+            res.status(200).send(token)
+        } catch (err) {
+            res.status(err.customErrorCode || 400).send({
+                message: err.message,
+            })
+        } 
+    }
 }

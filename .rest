@@ -36,4 +36,9 @@ Content-Type: application/json
 #### get music post
 GET  http://localhost:3003/music/13c52482-27b0-42b3-90ca-c4f9f58dd470
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NTdjOTUwLTE0MjctNDE2Mi04YzI5LWYyNzg5MTUyMGYyNyIsImlhdCI6MTYwNzEwMzA2OSwiZXhwIjoxNjA3NjQzMDY5fQ.zxPUgFYsIZyPx5X4re8KZ6XbUJO8-1KFJF4M-Afu3qU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NTdjOTUwLTE0MjctNDE2Mi04YzI5LWYyNzg5MTUyMGYyNyIsImlhdCI6MTYwNzI4MDk4MiwiZXhwIjoxNjA3ODIwOTgyfQ.TQa-br14AR-iqruRcDZUNm20itBrHvRCJEB6TbHoiTM
+
+#### get all music posts
+GET  http://localhost:3003/music/all
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NTdjOTUwLTE0MjctNDE2Mi04YzI5LWYyNzg5MTUyMGYyNyIsImlhdCI6MTYwNzI4MDk4MiwiZXhwIjoxNjA3ODIwOTgyfQ.TQa-br14AR-iqruRcDZUNm20itBrHvRCJEB6TbHoiTM
