@@ -60,4 +60,21 @@ export class MusicBusiness {
            throw new BaseError(error.message, error.statusCode)
        } 
     }
+
+    async getAllMusic(token:string): Promise<Music> {
+ 
+        try {
+         const tokenData = this.authenticator.getData(token)
+ 
+         if(!tokenData){
+                 throw new BaseError("not authorized", 401)
+             }
+ 
+          const result = await this.musicdatabase.getAllMusic()
+          return result
+     }   
+        catch (error) {
+            throw new BaseError(error.message, error.statusCode)
+        } 
+     }
 }
