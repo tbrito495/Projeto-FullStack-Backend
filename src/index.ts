@@ -5,8 +5,9 @@ import { userRouter } from "./routes/userRouter";
 import { musicRouter } from "./routes/musicRouter";
 
 
-
 const app = express();
+var cors = require('cors')
+app.use(cors())
 
 app.use(express.json());
 
