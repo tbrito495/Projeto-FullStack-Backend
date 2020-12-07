@@ -6,6 +6,7 @@ import { musicRouter } from "./routes/musicRouter";
 
 
 const app = express();
+
 var cors = require('cors')
 app.use(cors())
 
