@@ -3,10 +3,11 @@ POST http://localhost:3003/user/signup
 Content-Type: application/json
 
 {
-    "name":"Jose",
-    "nickname":"ze",
-    "password":"123456",
-    "email":"jose@mail.com"
+    "name":"marcos",
+    "email":"marcos@mail.com",
+    "nickname":"marc",
+    "password":"123456"
+ 
 
 }
 
@@ -22,19 +23,20 @@ Content-Type: application/json
 
 ### create music post
 POST http://localhost:3003/music/register
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NTdjOTUwLTE0MjctNDE2Mi04YzI5LWYyNzg5MTUyMGYyNyIsImlhdCI6MTYwNzEwMzA2OSwiZXhwIjoxNjA3NjQzMDY5fQ.zxPUgFYsIZyPx5X4re8KZ6XbUJO8-1KFJF4M-Afu3qU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NTdjOTUwLTE0MjctNDE2Mi04YzI5LWYyNzg5MTUyMGYyNyIsImlhdCI6MTYwNzUzODg4MywiZXhwIjoxNjA4MDc4ODgzfQ.Gsb4Mgfy2BNlyw1QgAN7grZVdyb4vKMcHs726-2xc4U
 Content-Type: application/json
 
 {
-    "title":"eu vi gnomos",
-    "file":"https://www.youtube.com/watch?v=myzNvWKRTNc",
-    "genre":"reggae",
-    "album":"ilegal"    
+    "title":"Papercut",
+    "file":"https://1drv.ws/u/s!Alu2T8ANNoGZmxx78dpSOcTA909X?e=mv2e5d",
+    "genre":"Alternative Rock",
+    "album":"Hybrid Theory",
+    "author_name":"linking park"    
 
 } 
 
 #### get music post
-GET  http://localhost:3003/music/13c52482-27b0-42b3-90ca-c4f9f58dd470
+GET  http://localhost:3003/music/8bd184ee-ee56-4336-9e3b-d1140b1ae9c9
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NTdjOTUwLTE0MjctNDE2Mi04YzI5LWYyNzg5MTUyMGYyNyIsImlhdCI6MTYwNzI4MDk4MiwiZXhwIjoxNjA3ODIwOTgyfQ.TQa-br14AR-iqruRcDZUNm20itBrHvRCJEB6TbHoiTM
 

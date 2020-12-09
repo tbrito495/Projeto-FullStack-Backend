@@ -18,7 +18,7 @@ export class MusicBusiness {
                 throw new BaseError("not authorized", 401)
             }
             
-            if (!input.title || !input.file || !input.genre || !input.album) {
+            if (!input.title || !input.file || !input.genre || !input.album ||!input.author_name) {
                 throw new BaseError("Invalid input to register music", 422)
             }
             
