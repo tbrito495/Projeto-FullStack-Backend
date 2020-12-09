@@ -18,6 +18,7 @@ export class MusicDatabase extends BaseDatabase {
                 file: music.getFile(),
                 genre: music.getGenre(),
                 album: music.getAlbum(),
+                author_name:music.getAuthorName()
             })
             .into(MusicDatabase.TABLE_NAME)
 
@@ -35,7 +36,7 @@ export class MusicDatabase extends BaseDatabase {
             return
 
         } catch (err) {
-            console.log(music)
+            console.log(music.getId())
             throw new Error(err.sqlMessage || err.message)
         }
     }

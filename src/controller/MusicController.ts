@@ -14,7 +14,8 @@ export class MusicController {
                 title: req.body.title,
                 file: req.body.file,
                 genre: req.body.genre,
-                album: req.body.album
+                album: req.body.album,
+                author_name:req.body.author_name
             }
     
             const musicBusiness = new MusicBusiness(

@@ -7,6 +7,7 @@ export class Music {
         private file: string,
         private genre: string[],
         private album: string, 
+        private author_name: string,
     ) {}
 
     public getId(): string {
@@ -37,6 +38,10 @@ export class Music {
         return this.album
     }
 
+    public getAuthorName():string{
+        return this.author_name
+    }
+
     public setId(id: string) {
         this.id = id
     }
@@ -64,6 +69,9 @@ export class Music {
     public setAlbum(album:string) {
         this.album = album
     }
+    public setAuthorName(author_name:string) {
+        this.author_name = author_name
+    }
     
     static toMusicModel(music: any): Music {
         return new Music(
@@ -73,7 +81,8 @@ export class Music {
             music.date,
             music.file,
             music.genre,  
-            music.album   
+            music.album,
+            music.author_name
                );
       }
 }
@@ -81,6 +90,7 @@ export interface MusicInputDTO {
     title: string;
     file: string,
     genre:string[],
-    album:string
-}
+    album:string,
+    author_name:string
+}   
 
